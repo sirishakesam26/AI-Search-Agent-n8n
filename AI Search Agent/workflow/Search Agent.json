@@ -1,0 +1,150 @@
+{
+  "name": "Search Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "99334ae6-6745-4456-8a79-7c74ae3d1303",
+      "name": "When chat message received",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        112
+      ],
+      "webhookId": "eddbc9c8-3fb1-43b9-b474-bccb64b51979"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "3dcafd6b-e03c-4651-96f6-a8edbf82aa77",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        288,
+        112
+      ]
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "openai/gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "openai/gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "18b62e32-69b7-410a-9eb8-fd2906db4ca9",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        128,
+        320
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "Kb7Ngp7AxHHHXRUp",
+          "name": "OpenAI account 4"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "d431ad5d-1f3a-43ea-aa89-049b7284b064",
+      "name": "Simple Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        304,
+        320
+      ]
+    },
+    {
+      "parameters": {
+        "additionalFields": {},
+        "requestOptions": {}
+      },
+      "id": "907bcc63-95d9-4837-8464-b4f40407211e",
+      "name": "Google search in SerpApi",
+      "type": "n8n-nodes-serpapi.serpApiTool",
+      "typeVersion": 1,
+      "position": [
+        480,
+        304
+      ],
+      "credentials": {
+        "serpApi": {
+          "id": "jnz04lJ22SFxJwjB",
+          "name": "SerpApi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google search in SerpApi": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "696f0acc-83bf-40d6-bb94-a1756cf3d999",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4c70b059e72ca48ea74bad58090b9617259f24527c477cc55caca32aa84f9b40"
+  },
+  "nodeGroups": [],
+  "id": "hmq8EoqIpzjUpJG3",
+  "tags": []
+}
